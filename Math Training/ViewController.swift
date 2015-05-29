@@ -34,19 +34,7 @@ class ViewController: UIViewController {
     
     @IBAction func button(sender: UIButton) {
         
-        if field.text == "p" {
-            
-            levelCalc = 4
-            
-            createProblem()
-            
-            level.text = "Level: \(levelCalc)"
-            
-            field.text = ""
-            
-        } else if field.text == "" {
-            
-            
+        if field.text == "" {
             
         } else if field.text == "\(answer)" {
             
@@ -98,9 +86,19 @@ class ViewController: UIViewController {
                 
             } else if operationNumber == 1 {
                 
-                answer = randomNumber - randomNumber2
+                if randomNumber > randomNumber2 {
                 
-                label.text = "\(randomNumber) - \(randomNumber2) = ?"
+                    answer = randomNumber - randomNumber2
+                
+                    label.text = "\(randomNumber) - \(randomNumber2) = ?"
+                    
+                } else {
+                    
+                    answer = randomNumber2 - randomNumber
+                    
+                    label.text = "\(randomNumber2) - \(randomNumber) = ?"
+                    
+                }
                 
             } else if operationNumber == 2 {
                 
@@ -166,17 +164,21 @@ class ViewController: UIViewController {
                 
             } else {
                 
-                var array = [2, 4, 5, 8]
+                var array = [2, 4, 5, 10, 20, 50]
                 
-                randomNumber2 = Int(arc4random_uniform(10))
+                randomNumber2 = Int(arc4random_uniform(10)) + 1
                 
                 var num = array[Int(arc4random_uniform(4))]
                 
                 randomNumber = randomNumber2 * num - randomNumber2
                 
-                answer = 100 * randomNumber2 / (randomNumber2 + randomNumber)
+                var thing1 = 100 * randomNumber2
                 
-                label.text = "In a bag, there are \(randomNumber) green marbles and \(randomNumber2) red marbles. What is the chance that you pick a red marble? (Answer in the form of a percent without the symbol.)"
+                var thing2 = randomNumber2 + randomNumber
+                
+                answer = thing1 / thing2
+                
+                label.text = "In a bag, there are \(randomNumber) blue marbles and \(randomNumber2) red marbles. What is the chance that you pick a red marble? (Answer in the form of a percent without the symbol.)"
                 
             }
             
@@ -221,6 +223,10 @@ class ViewController: UIViewController {
                 label.text = "A rectangle is \(randomNumber) tall and \(randomNumber2) wide. What is its perimeter?"
                 
             }
+            
+        } else if levelCalc == 5 {
+            
+            field.text = "You're done!"
             
         }
         
